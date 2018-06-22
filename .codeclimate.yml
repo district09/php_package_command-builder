@@ -14,6 +14,11 @@ engines:
     enabled: true
   markdownlint:
     enabled: true
+    checks:
+      MD013:
+        enabled: true
+        config:
+          code_blocks: false
 ratings:
   paths:
   - "**.php"
