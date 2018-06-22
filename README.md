@@ -23,6 +23,10 @@ $builder = CommandBuilder::create('ls')
             ->addArgument('mydir created')
       );
 print $builder;
+```
 
-// Output: { { { ls -a -l | grep 'mydir'; } && echo 'mydir already exists'; } || { mkdir 'mydir' && echo 'mydir created'; }; }
+### Output
+
+```sh
+{ { { ls -a -l | grep 'mydir'; } && echo 'mydir already exists'; } || { mkdir 'mydir' && echo 'mydir created'; }; }
 ```

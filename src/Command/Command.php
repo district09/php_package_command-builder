@@ -2,7 +2,8 @@
 
 namespace DigipolisGent\CommandBuilder\Command;
 
-class Command {
+class Command
+{
 
     /**
      * @var string
