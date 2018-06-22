@@ -36,6 +36,19 @@ class CommandBuilder
     }
 
     /**
+     * Static constructor
+     *
+     * @param string|CommandBuilder $command
+     *   The command to create the builder for.
+     *
+     * @return CommandBuilder
+     */
+    public static function create($command)
+    {
+        return new CommandBuilder($command);
+    }
+
+    /**
      * Add a flag to the command.
      *
      * @param string $flag
@@ -155,7 +168,7 @@ class CommandBuilder
      *   The command to chain.
      * @param string $operator
      *   The operator to chain with.
-     * 
+     *
      * @return CommandBuilder
      */
     protected function chain($command, $operator): CommandBuilder

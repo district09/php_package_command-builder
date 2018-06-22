@@ -10,7 +10,7 @@ class Flag
     protected $name;
 
     /**
-     * Create a new flag.
+     * Create a new Flag.
      *
      * @param string $name
      */

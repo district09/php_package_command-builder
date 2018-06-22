@@ -9,8 +9,7 @@ require_once 'vendor/autoload.php';
 
 use DigipolisGent\CommandBuilder\CommandBuilder;
 
-$builder = new CommandBuilder('ls');
-$builder
+$builder = CommandBuilder::create('ls')
         ->addFlag('a')
         ->addFlag('l')
     ->pipeOutputTo('grep')
@@ -18,7 +17,7 @@ $builder
     ->onSuccess('echo')
         ->addArgument('mydir already exists')
     ->onFailure(
-        (new CommandBuilder('mkdir'))
+        CommandBuilder::create('mkdir')
             ->addArgument('mydir')
         ->onSuccess('echo')
             ->addArgument('mydir created')
