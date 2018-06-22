@@ -26,6 +26,7 @@ print $builder;
 ```
 
 ### Output
+
 ```sh
 { { { ls -a -l | grep 'mydir'; } && echo 'mydir already exists'; } || { mkdir 'mydir' && echo 'mydir created'; }; }
 ```
