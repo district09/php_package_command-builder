@@ -9,10 +9,16 @@
             "email": "sebreghts.jelle@gmail.com"
         }
     ],
-    "require": {},
     "autoload": {
         "psr-4": {
-            "DigipolisGent\\CommandBuilder\\": "src"
+            "DigipolisGent\\CommandBuilder\\": "src",
+            "DigipolisGent\\CommandBuilder\\Test\\": "tests"
         }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~6"
+    },
+    "require": {
+        "php": ">=7.0"
     }
 }
