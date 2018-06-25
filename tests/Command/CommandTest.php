@@ -37,6 +37,14 @@ class CommandTest extends TestCase
         $this->assertEquals($this->commandString . ' -' . $flag, (string) $this->command);
     }
 
+    public function testAddFlagWithValue()
+    {
+        $flag = uniqid();
+        $value = uniqid();
+        $this->assertEquals($this->command, $this->command->addFlag($flag, $value));
+        $this->assertEquals($this->commandString . ' -' . $flag . ' ' . escapeshellarg($value), (string) $this->command);
+    }
+
     public function testAddOption()
     {
         $option = uniqid();
