@@ -43,12 +43,14 @@ class Command
      *
      * @param string $flag
      *   The flag to add, without the leading dash.
+     * @param string $value
+     *   The value for the flag (optional).
      *
      * @return Command
      */
-    public function addFlag($flag): Command
+    public function addFlag($flag, $value = null): Command
     {
-        $this->flags[] = new Flag($flag);
+        $this->flags[] = new Flag($flag, $value);
 
         return $this;
     }
