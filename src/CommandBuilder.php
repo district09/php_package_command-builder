@@ -188,7 +188,7 @@ class CommandBuilder
      *
      * @return CommandBuilder
      */
-    protected function chain($command, $operator): CommandBuilder
+    public function chain($command, $operator): CommandBuilder
     {
         if (is_null($this->operator)) {
             $this->operator = $operator;
