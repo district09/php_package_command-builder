@@ -98,6 +98,21 @@ class CommandBuilder
     }
 
     /**
+     * Add a raw argument to the command.
+     *
+     * @param string $argument
+     *   The argument to add.
+     *
+     * @return CommandBuilder
+     */
+    public function addRawArgument($argument): CommandBuilder
+    {
+        $this->currentCommand->addRawArgument($argument);
+
+        return $this;
+    }
+
+    /**
      * Add a command to execute on success.
      *
      * @param string|CommandBuilder $command
