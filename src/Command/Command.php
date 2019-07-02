@@ -56,6 +56,23 @@ class Command
     }
 
     /**
+     * Add a raw flag to the command.
+     *
+     * @param string $flag
+     *   The flag to add, without the leading dash.
+     * @param string $value
+     *   The raw (unescaped) value for the flag (optional).
+     *
+     * @return Command
+     */
+    public function addRawFlag($flag, $value = null): Command
+    {
+        $this->flags[] = new RawFlag($flag, $value);
+
+        return $this;
+    }
+
+    /**
      * Add an option to the command.
      *
      * @param string $option
@@ -68,6 +85,23 @@ class Command
     public function addOption($option, $value = null): Command
     {
         $this->options[] = new Option($option, $value);
+
+        return $this;
+    }
+
+    /**
+     * Add a raw option to the command.
+     *
+     * @param string $option
+     *   The option to add, without the leading dashes.
+     * @param string $value
+     *   The raw (unescaped) value for the option (optional).
+     *
+     * @return Command
+     */
+    public function addRawOption($option, $value = null): Command
+    {
+        $this->options[] = new RawOption($option, $value);
 
         return $this;
     }
