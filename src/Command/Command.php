@@ -87,6 +87,21 @@ class Command
         return $this;
     }
 
+    /**
+     * Add a raw (unescaped) argument to the command.
+     *
+     * @param string $argument
+     *   The argument to add.
+     *
+     * @return Command
+     */
+    public function addRawArgument($argument): Command
+    {
+        $this->arguments[] = new RawArgument($argument);
+
+        return $this;
+    }
+
     public function __toString()
     {
         $command = $this->command;
