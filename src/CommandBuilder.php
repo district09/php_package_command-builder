@@ -66,6 +66,23 @@ class CommandBuilder
     }
 
     /**
+     * Add a raw flag to the command.
+     *
+     * @param string $flag
+     *   The flag to add, without the leading dash.
+     * @param string $value
+     *   The value for the flag (optional).
+     *
+     * @return CommandBuilder
+     */
+    public function addRawFlag($flag, $value = null): CommandBuilder
+    {
+        $this->currentCommand->addRawFlag($flag, $value);
+
+        return $this;
+    }
+
+    /**
      * Add an option to the command.
      *
      * @param string $option
@@ -78,6 +95,23 @@ class CommandBuilder
     public function addOption($option, $value = null): CommandBuilder
     {
         $this->currentCommand->addOption($option, $value);
+
+        return $this;
+    }
+
+    /**
+     * Add a raw option to the command.
+     *
+     * @param string $option
+     *   The option to add, without the leading dashes.
+     * @param string $value
+     *   The value for the option (optional).
+     *
+     * @return CommandBuilder
+     */
+    public function addRawOption($option, $value = null): CommandBuilder
+    {
+        $this->currentCommand->addRawOption($option, $value);
 
         return $this;
     }
