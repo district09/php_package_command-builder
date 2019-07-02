@@ -53,12 +53,14 @@ class CommandBuilder
      *
      * @param string $flag
      *   The flag to add, without the leading dash.
+     * @param string $value
+     *   The value for the flag (optional).
      *
      * @return CommandBuilder
      */
-    public function addFlag($flag): CommandBuilder
+    public function addFlag($flag, $value = null): CommandBuilder
     {
-        $this->currentCommand->addFlag($flag);
+        $this->currentCommand->addFlag($flag, $value);
 
         return $this;
     }
