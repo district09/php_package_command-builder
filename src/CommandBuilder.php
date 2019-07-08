@@ -237,4 +237,18 @@ class CommandBuilder
 
         return $this;
     }
+
+    public function __clone()
+    {
+        $newChain = [];
+        foreach ($this->chain as $command) {
+            if (is_object($command)) {
+                $newChain[] = clone $command;
+                continue;
+            }
+            $newChain[] = $command;
+        }
+        $this->chain = $newChain;
+        $this->currentCommand = end($this->chain);
+    }
 }
