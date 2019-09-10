@@ -24,25 +24,13 @@ class CommandBuilderTest extends TestCase
      */
     protected $builder;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->command = uniqid();
-        $this->commandMock = $this->getMockBuilder(Command::class)
-            ->setConstructorArgs([$this->command])
-            ->setMethods([
-                'addFlag',
-                'addOption',
-                'addArgument',
-            ])
-            ->getMock();
+        $this->commandMock = $this->prophesize(Command::class)
+            ->willBeConstructedWith([$this->command]);
         $this->builder = CommandBuilder::create(uniqid());
-        $currentCommand = new \ReflectionProperty($this->builder, 'currentCommand');
-        $currentCommand->setAccessible(true);
-        $currentCommand->setValue($this->builder, $this->commandMock);
-        $chain = new \ReflectionProperty($this->builder, 'chain');
-        $chain->setAccessible(true);
-        $chain->setValue($this->builder, [$this->commandMock]);
     }
     public function testCreate()
     {
@@ -56,10 +44,9 @@ class CommandBuilderTest extends TestCase
     {
         $flag = uniqid();
         $this->commandMock
-            ->expects($this->once())
-            ->method('addFlag')
-            ->with($flag)
-            ->willReturnSelf();
+            ->addFlag($flag, null)
+            ->shouldBeCalledOnce();
+        $this->setCommand($this->commandMock->reveal());
         $this->assertEquals($this->builder, $this->builder->addFlag($flag));
     }
 
@@ -67,10 +54,9 @@ class CommandBuilderTest extends TestCase
     {
         $option = uniqid();
         $this->commandMock
-            ->expects($this->once())
-            ->method('addOption')
-            ->with($option)
-            ->willReturnSelf();
+            ->addOption($option, null)
+            ->shouldBeCalledOnce();
+        $this->setCommand($this->commandMock->reveal());
         $this->assertEquals($this->builder, $this->builder->addOption($option));
     }
 
@@ -79,10 +65,9 @@ class CommandBuilderTest extends TestCase
         $option = uniqid();
         $value = uniqid();
         $this->commandMock
-            ->expects($this->once())
-            ->method('addOption')
-            ->with($option, $value)
-            ->willReturnSelf();
+            ->addOption($option, $value)
+            ->shouldBeCalledOnce();
+        $this->setCommand($this->commandMock->reveal());
         $this->assertEquals($this->builder, $this->builder->addOption($option, $value));
     }
 
@@ -90,10 +75,9 @@ class CommandBuilderTest extends TestCase
     {
         $argument = uniqid();
         $this->commandMock
-            ->expects($this->once())
-            ->method('addArgument')
-            ->with($argument)
-            ->willReturnSelf();
+            ->addArgument($argument)
+            ->shouldBeCalledOnce();
+        $this->setCommand($this->commandMock->reveal());
         $this->assertEquals($this->builder, $this->builder->addArgument($argument));
     }
 
@@ -102,10 +86,10 @@ class CommandBuilderTest extends TestCase
      */
     public function testChaining($method, $operator)
     {
+        $this->commandMock->__toString()->willReturn($this->command);
+        $this->setCommand($this->commandMock->reveal());
         $chained = uniqid();
         $this->assertEquals($this->builder, $this->builder->{$method}($chained));
-        $chainProperty = new \ReflectionProperty(CommandBuilder::class, 'chain');
-        $chainProperty->setAccessible(true);
         $this->assertEquals('{ ' . $this->command . ' ' . $operator . ' ' . $chained . '; }', (string) $this->builder);
     }
 
@@ -114,12 +98,12 @@ class CommandBuilderTest extends TestCase
      */
     public function testChainingWithDifferentOperator($method, $operator, $differentMethod, $differentOperator)
     {
+        $this->commandMock->__toString()->willReturn($this->command);
+        $this->setCommand($this->commandMock->reveal());
         $chained = uniqid();
         $chained2 = uniqid();
         $this->assertEquals($this->builder, $this->builder->{$method}($chained));
         $this->assertEquals($this->builder, $this->builder->{$differentMethod}($chained2));
-        $chainProperty = new \ReflectionProperty(CommandBuilder::class, 'chain');
-        $chainProperty->setAccessible(true);
         $this->assertEquals('{ { ' . $this->command . ' ' . $operator . ' ' . $chained . '; } ' . $differentOperator . ' ' . $chained2 . '; }', (string) $this->builder);
     }
 
@@ -133,4 +117,13 @@ class CommandBuilderTest extends TestCase
         ];
     }
 
+    protected function setCommand(Command $command)
+    {
+        $currentCommand = new \ReflectionProperty($this->builder, 'currentCommand');
+        $currentCommand->setAccessible(true);
+        $currentCommand->setValue($this->builder, $command);
+        $chain = new \ReflectionProperty($this->builder, 'chain');
+        $chain->setAccessible(true);
+        $chain->setValue($this->builder, [$command]);
+    }
 }

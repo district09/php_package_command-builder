@@ -1,28 +1,36 @@
-engines:
+version: "2"
+
+plugins:
   phpcodesniffer:
     enabled: true
     config:
       standard: "PSR1,PSR2"
   phpmd:
     enabled: true
+    config:
+      rulesets: "phpmd.xml"
   duplication:
     enabled: true
     config:
       languages:
         php:
+          mass_threshold: 55
   fixme:
     enabled: true
   markdownlint:
     enabled: true
     checks:
+      # See https://github.com/markdownlint/markdownlint/blob/master/docs/RULES.md
+      MD024:
+        enabled: false
       MD013:
         enabled: true
         code_blocks: false
-ratings:
-  paths:
-  - "**.php"
-  - "**.md"
-exclude_paths:
-- "**/vendor/**/*"
-- "**/.idea/**/*"
-- "tests"
+    issue_override:
+      severity: minor
+
+exclude_patterns:
+  - ".github"
+  - "**/vendor/**/*"
+  - "examples/"
+  - "tests/"

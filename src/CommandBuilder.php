@@ -4,6 +4,9 @@ namespace DigipolisGent\CommandBuilder;
 
 use DigipolisGent\CommandBuilder\Command\Command;
 
+/**
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
+ */
 class CommandBuilder
 {
 
