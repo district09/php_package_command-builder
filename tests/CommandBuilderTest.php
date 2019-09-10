@@ -50,6 +50,16 @@ class CommandBuilderTest extends TestCase
         $this->assertEquals($this->builder, $this->builder->addFlag($flag));
     }
 
+    public function testAddRawFlag()
+    {
+        $flag = uniqid();
+        $this->commandMock
+            ->addRawFlag($flag, null)
+            ->shouldBeCalledOnce();
+        $this->setCommand($this->commandMock->reveal());
+        $this->assertEquals($this->builder, $this->builder->addRawFlag($flag));
+    }
+
     public function testAddOption()
     {
         $option = uniqid();
@@ -58,6 +68,16 @@ class CommandBuilderTest extends TestCase
             ->shouldBeCalledOnce();
         $this->setCommand($this->commandMock->reveal());
         $this->assertEquals($this->builder, $this->builder->addOption($option));
+    }
+
+    public function testAddRawOption()
+    {
+        $option = uniqid();
+        $this->commandMock
+            ->addRawOption($option, null)
+            ->shouldBeCalledOnce();
+        $this->setCommand($this->commandMock->reveal());
+        $this->assertEquals($this->builder, $this->builder->addRawOption($option));
     }
 
     public function testAddOptionWithValue()
@@ -71,6 +91,17 @@ class CommandBuilderTest extends TestCase
         $this->assertEquals($this->builder, $this->builder->addOption($option, $value));
     }
 
+    public function testAddRawOptionWithValue()
+    {
+        $option = uniqid();
+        $value = uniqid();
+        $this->commandMock
+            ->addRawOption($option, $value)
+            ->shouldBeCalledOnce();
+        $this->setCommand($this->commandMock->reveal());
+        $this->assertEquals($this->builder, $this->builder->addRawOption($option, $value));
+    }
+
     public function testAddArgument()
     {
         $argument = uniqid();
@@ -79,6 +110,16 @@ class CommandBuilderTest extends TestCase
             ->shouldBeCalledOnce();
         $this->setCommand($this->commandMock->reveal());
         $this->assertEquals($this->builder, $this->builder->addArgument($argument));
+    }
+
+    public function testAddRawArgument()
+    {
+        $argument = uniqid();
+        $this->commandMock
+            ->addRawArgument($argument)
+            ->shouldBeCalledOnce();
+        $this->setCommand($this->commandMock->reveal());
+        $this->assertEquals($this->builder, $this->builder->addRawArgument($argument));
     }
 
     /**
