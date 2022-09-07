@@ -10,7 +10,7 @@ class Option
     protected $name;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $value;
 

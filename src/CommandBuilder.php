@@ -11,12 +11,12 @@ class CommandBuilder
 {
 
     /**
-     * @var Command[]
+     * @var CommandBuilder[]|Command[]|string[]
      */
     protected $chain;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $operator;
 
