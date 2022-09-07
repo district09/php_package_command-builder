@@ -1,14 +1,20 @@
 {
     "name": "digipolisgent/command-builder",
     "description": "A generic shell command builder.",
-    "type": "library",
     "license": "MIT",
+    "type": "library",
     "authors": [
         {
             "name": "Jelle Sebreghts",
             "email": "sebreghts.jelle@gmail.com"
         }
     ],
+    "require": {
+        "php": "^7.4 || ^8.0"
+    },
+    "require-dev": {
+        "district09/qa-php": "^1.1"
+    },
     "autoload": {
         "psr-4": {
             "DigipolisGent\\CommandBuilder\\": "src"
@@ -16,11 +22,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-             "DigipolisGent\\CommandBuilder\\Test\\": "tests"
+            "DigipolisGent\\CommandBuilder\\Test\\": "tests"
         }
-    },
-    "require": {
-        "php": "^7.4 || ^8.0"
     },
     "config": {
         "allow-plugins": {
@@ -43,8 +46,5 @@
         "phpmd": "vendor/bin/grumphp run --tasks=phpmd",
         "phpstan": "vendor/bin/grumphp run --tasks=phpstan",
         "phpunit": "vendor/bin/phpunit --configuration=phpunit.qa-php.xml"
-    },
-    "require-dev": {
-        "district09/qa-php": "^1.1"
     }
 }
