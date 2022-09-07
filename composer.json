@@ -22,9 +22,6 @@
     "require": {
         "php": "^7.4 || ^8.0"
     },
-    "require-dev": {
-        "digipolisgent/qa-drupal": "^1.7"
-    },
     "config": {
         "allow-plugins": {
             "phpro/grumphp-shim": true,
@@ -46,5 +43,8 @@
         "phpmd": "vendor/bin/grumphp run --tasks=phpmd",
         "phpstan": "vendor/bin/grumphp run --tasks=phpstan",
         "phpunit": "vendor/bin/phpunit --configuration=phpunit.qa-php.xml"
+    },
+    "require-dev": {
+        "district09/qa-php": "^1.1"
     }
 }
